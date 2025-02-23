@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 
 class TestHTMLNode(unittest.TestCase):
@@ -22,6 +22,13 @@ class TestHTMLNode(unittest.TestCase):
     def test_single_prop(self):
         node = HTMLNode(props={"href": "https://google.com"})
         assert node.props_to_html() == ' href="https://google.com"'
+    def test_lnode(self):
+        node = LeafNode("p", "This is a paragraph of text.")
+        assert node.to_html() == '<p>This is a paragraph of text.</p>'
+    def test_lnode(self):
+        node = LeafNode("a", "Click me!", {"href": "https://www.google.com"})
+        assert node.to_html() == '<a href="https://www.google.com">Click me!</a>'
+
 
 
 if __name__ == "__main__":
